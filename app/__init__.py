@@ -27,6 +27,9 @@ def create_app(config_class=Config):
     mail.init_app(app)
     from app.api import bp as api_bp
     app.register_blueprint(api_bp, url_prefix='/api')
+    with app.app_context():
+        from app import models
+        db.create_all()
 
     if os.environ.get('APP_MODE') == 'prod':
         print('Production Mode On')

@@ -19,5 +19,6 @@ CMD flask db init ; \
 flask db stamp head && \
 flask db migrate && \
 flask db upgrade && \
+python3 setup.py && \
 gunicorn --workers 4 --timeout 120 -b 0.0.0.0:5000 --reload forecastment:app
 
