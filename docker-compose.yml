@@ -1,0 +1,27 @@
+version: "3.7"
+
+services:
+  forecastment_backend:
+
+    image: forecastment/forecastment:v0
+    build: .
+    volumes:
+      - ./:/forecastment_backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:12
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: mydb
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:
